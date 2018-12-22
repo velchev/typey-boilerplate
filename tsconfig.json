@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist/",
+    "moduleResolution": "node",
+    "module": "commonjs",
+    "strict": true,
+    "pretty": true,
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "target": "es6",
+    "jsx": "react",
+  },
+  "typeRoots": [
+    "./node_modules/@types/",
+    "./src/types/"
+  ],
+  "paths": {
+    "^*": [
+      "./src*"
+    ]
+  },
+  "baseUrl": "./",
+  "include": [
+    "./src/**/*"
+  ]
+}
