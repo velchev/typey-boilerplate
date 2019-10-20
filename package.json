@@ -6,6 +6,7 @@
   "scripts": {
     "start": "webpack-dev-server --mode development",
     "build": "webpack --mode production",
+    "prettier": "prettier --write 'src/**/*.ts?(x)'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Nikolaev Tomov",
