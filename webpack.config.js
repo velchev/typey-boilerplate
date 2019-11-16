@@ -10,12 +10,10 @@ module.exports = {
   entry: path.resolve(process.cwd(), 'app', 'index.tsx'),
 
   output: {
-    publicPath: path.resolve(__dirname, '/'),
-    path: path.resolve(__dirname, 'dist'),
+    publicPath: path.resolve(process.cwd(), '/'),
+    path: path.resolve(process.cwd(), 'dist'),
     filename: "bundle.js",
   },
-
-  mode: 'production',
 
   devtool: "source-map",
 
