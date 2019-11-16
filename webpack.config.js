@@ -12,10 +12,11 @@ module.exports = {
   output: {
     publicPath: path.resolve(process.cwd(), '/'),
     path: path.resolve(process.cwd(), 'dist'),
-    filename: "bundle.js",
+    filename: 'bundle.js',
   },
 
-  devtool: "source-map",
+  // TODO: if production set to none
+  devtool: 'source-map',
 
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.json'],
