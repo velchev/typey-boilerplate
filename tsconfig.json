@@ -1,29 +1,32 @@
 {
   "compilerOptions": {
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
     "outDir": "./dist/",
     "moduleResolution": "node",
-    "module": "commonjs",
     "strict": true,
     "pretty": true,
     "sourceMap": true,
     "noImplicitAny": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
+    "allowJs": false,
+    "checkJs": false,
     "skipLibCheck": true,
     "target": "es6",
     "jsx": "react",
   },
   "typeRoots": [
     "./node_modules/@types/",
-    "./src/types/"
+    "./app/@types/"
   ],
   "paths": {
     "^*": [
-      "./src*"
+      "./app*"
     ]
   },
   "baseUrl": "./",
   "include": [
-    "./src/**/*"
+    "./app/"
   ]
 }

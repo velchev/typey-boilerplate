@@ -41,7 +41,7 @@
         "esSpecCompliant": true
       }
     ],
-    "space-before-function-paren": [true, "always"],
+    "space-before-function-paren": false,
     "strict-type-predicates": true,
 
     "object-literal-sort-keys": false,

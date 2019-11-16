@@ -1,16 +1,16 @@
 {
-  "name": "typescript-project",
-  "version": "1.0.0",
+  "name": "typey-boilerplate",
+  "version": "0.0.1",
   "description": "a better typescript project",
-  "main": "src/index.tsx",
+  "main": "app/index.tsx",
   "scripts": {
     "start": "webpack-dev-server --mode development",
     "build": "webpack --mode production",
-    "prettier": "prettier --write 'src/**/*.ts?(x)'",
+    "prettier": "prettier --write 'app/**/*.ts?(x)'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Nikolaev Tomov",
-  "license": "ISC",
+  "author": "",
+  "license": "",
   "devDependencies": {
     "circular-dependency-plugin": "^5.2.0",
     "fork-ts-checker-webpack-plugin": "^0.4.9",
