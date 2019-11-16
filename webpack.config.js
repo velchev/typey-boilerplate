@@ -2,6 +2,7 @@ const { EnvironmentPlugin } = require('webpack');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const CircularDependencyPlugin = require('circular-dependency-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+// const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const path = require('path');
 
 const PORT = process.env.CLIENT_PORT || 9000;
@@ -42,6 +43,25 @@ module.exports = {
     compress: true,
     port: PORT,
   },
+
+  // TODO: Fix optimisation error Unexpected token: keyword «const»
+  // optimization: {
+  //   minimizer: [
+  //     new UglifyJsPlugin({
+  //       uglifyOptions: {
+  //         warnings: false,
+  //         parse: {},
+  //         compress: {},
+  //         mangle: true,
+  //         output: null,
+  //         toplevel: false,
+  //         nameCache: null,
+  //         ie8: false,
+  //         keep_fnames: false,
+  //       },
+  //     }),
+  //   ],
+  // },
 
   plugins: [
     new ForkTsCheckerWebpackPlugin(),
