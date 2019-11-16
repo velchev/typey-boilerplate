@@ -4,8 +4,10 @@ const CircularDependencyPlugin = require('circular-dependency-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
+const PORT = process.env.CLIENT_PORT || 9000;
+
 module.exports = {
-  entry: path.resolve(__dirname, 'src', 'index.tsx'),
+  entry: path.resolve(process.cwd(), 'app', 'index.tsx'),
 
   output: {
     publicPath: path.resolve(__dirname, '/'),
@@ -16,36 +18,36 @@ module.exports = {
   devtool: "source-map",
 
   resolve: {
-    extensions: [".ts", ".tsx", ".js", ".json"],
+    extensions: ['.ts', '.tsx', '.js', '.json'],
   },
 
   module: {
     rules: [
-      { test: /\.tsx?$/, loader: "ts-loader" },
+      { test: /\.tsx?$/, loader: 'ts-loader' },
     ]
   },
 
   devServer: {
-    contentBase: path.resolve(__dirname),
+    contentBase: path.resolve(process.cwd(), 'app'),
     compress: true,
-    port: 9000,
+    port: PORT,
   },
 
   plugins: [
-
     new ForkTsCheckerWebpackPlugin(),
+
     new EnvironmentPlugin({
       NODE_ENV: 'development',
     }),
+
     new CircularDependencyPlugin({
       exclude: /a\.js|node_modules/,
       failOnError: true,
       cwd: process.cwd(),
     }),
+
     new HtmlWebpackPlugin({
       template: 'index.html',
     }),
-
   ]
-
 };
