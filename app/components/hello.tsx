@@ -14,4 +14,4 @@ export const Hello: React.FunctionComponent<Props> = ({
   </h1>
 );
 
-export default Hello;
+export default React.memo(Hello);

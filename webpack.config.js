@@ -2,17 +2,21 @@ const { EnvironmentPlugin } = require('webpack');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const CircularDependencyPlugin = require('circular-dependency-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-// const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const path = require('path');
 
 const PORT = process.env.CLIENT_PORT || 9000;
+const CWD = process.cwd();
 
 module.exports = {
-  entry: path.resolve(process.cwd(), 'app', 'index.tsx'),
+  entry: [
+    require.resolve('raf/polyfill'),
+    path.resolve(CWD, 'app', 'index.tsx')
+  ],
 
   output: {
-    publicPath: path.resolve(process.cwd(), '/'),
-    path: path.resolve(process.cwd(), 'dist'),
+    publicPath: path.resolve(CWD, '/'),
+    path: path.resolve(CWD, 'dist'),
     filename: 'bundle.js',
   },
 
@@ -28,40 +32,55 @@ module.exports = {
       {
         test: /\.ts(x?)$/,
         exclude: /node_modules/,
-        use: [{ loader: 'ts-loader' }]
+        use: [{ loader: require.resolve('ts-loader') }]
       },
       {
+        test: /\.ts(x?)$/,
         enforce: 'pre',
-        test: /\.js$/,
-        loader: 'source-map-loader'
+        loader: require.resolve('source-map-loader')
       },
+      {
+        test: /\.ts(x?)$/,
+        exclude: /(node_modules)/,
+        use: {
+          loader: require.resolve('babel-loader'),
+          options: {
+            presets: [
+              [require.resolve('@babel/preset-env'),
+              {
+                modules: false,
+                useBuiltIns: 'usage',
+              }],
+            ],
+          }
+        }
+      }
     ]
   },
 
   devServer: {
-    contentBase: path.resolve(process.cwd(), 'app'),
+    contentBase: path.resolve(CWD, 'app'),
     compress: true,
     port: PORT,
   },
 
-  // TODO: Fix optimisation error Unexpected token: keyword «const»
-  // optimization: {
-  //   minimizer: [
-  //     new UglifyJsPlugin({
-  //       uglifyOptions: {
-  //         warnings: false,
-  //         parse: {},
-  //         compress: {},
-  //         mangle: true,
-  //         output: null,
-  //         toplevel: false,
-  //         nameCache: null,
-  //         ie8: false,
-  //         keep_fnames: false,
-  //       },
-  //     }),
-  //   ],
-  // },
+  optimization: {
+    minimizer: [
+      new UglifyJsPlugin({
+        uglifyOptions: {
+          warnings: false,
+          parse: {},
+          compress: {},
+          mangle: true,
+          output: null,
+          toplevel: false,
+          nameCache: null,
+          ie8: false,
+          keep_fnames: false,
+        },
+      }),
+    ],
+  },
 
   plugins: [
     new ForkTsCheckerWebpackPlugin(),
@@ -73,11 +92,11 @@ module.exports = {
     new CircularDependencyPlugin({
       exclude: /a\.js|node_modules/,
       failOnError: true,
-      cwd: process.cwd(),
+      cwd: CWD,
     }),
 
     new HtmlWebpackPlugin({
-      template: 'index.html',
+      template: path.resolve(CWD, 'index.html'),
     }),
   ]
 };
