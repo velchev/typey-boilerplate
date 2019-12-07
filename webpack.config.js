@@ -25,6 +25,9 @@ module.exports = {
 
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.json'],
+    alias: {
+      '^': path.resolve(CWD, 'app'), // TODO: fix
+    },
   },
 
   module: {
@@ -41,7 +44,7 @@ module.exports = {
       },
       {
         test: /\.ts(x?)$/,
-        exclude: /(node_modules)/,
+        exclude: /node_modules/,
         use: {
           loader: require.resolve('babel-loader'),
           options: {
