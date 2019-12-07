@@ -8,6 +8,9 @@ const path = require('path');
 const PORT = process.env.CLIENT_PORT || 9000;
 const CWD = process.cwd();
 
+console.log('CWD', CWD);
+console.log('CWD 2', path.resolve(CWD, 'app'));
+
 module.exports = {
   entry: [
     require.resolve('raf/polyfill'),
