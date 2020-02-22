@@ -1,35 +1,37 @@
-const { EnvironmentPlugin } = require('webpack');
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
-const CircularDependencyPlugin = require('circular-dependency-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const path = require('path');
+/* eslint-disable @typescript-eslint/no-var-requires */
+const { EnvironmentPlugin } = require("webpack");
+const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
+const CircularDependencyPlugin = require("circular-dependency-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const path = require("path");
+/* eslint-enable @typescript-eslint/no-var-requires */
 
 const PORT = process.env.CLIENT_PORT || 9000;
 const CWD = process.cwd();
 
-console.log('CWD', CWD);
-console.log('CWD 2', path.resolve(CWD, 'app'));
+console.log("CWD", CWD);
+console.log("CWD 2", path.resolve(CWD, "app"));
 
 module.exports = {
   entry: [
-    require.resolve('raf/polyfill'),
-    path.resolve(CWD, 'app', 'index.tsx')
+    require.resolve("raf/polyfill"),
+    path.resolve(CWD, "app", "index.tsx"),
   ],
 
   output: {
-    publicPath: path.resolve(CWD, '/'),
-    path: path.resolve(CWD, 'dist'),
-    filename: 'bundle.js',
+    publicPath: path.resolve(CWD, "/"),
+    path: path.resolve(CWD, "dist"),
+    filename: "bundle.js",
   },
 
   // TODO: if production set to none
-  devtool: 'source-map',
+  devtool: "source-map",
 
   resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.json'],
+    extensions: [".ts", ".tsx", ".js", ".json"],
     alias: {
-      '^': path.resolve(CWD, 'app'), // TODO: fix
+      "^*": path.resolve(CWD, "app"),
     },
   },
 
@@ -38,34 +40,36 @@ module.exports = {
       {
         test: /\.ts(x?)$/,
         exclude: /node_modules/,
-        use: [{ loader: require.resolve('ts-loader') }]
+        use: [{ loader: require.resolve("ts-loader") }],
       },
       {
         test: /\.ts(x?)$/,
-        enforce: 'pre',
-        loader: require.resolve('source-map-loader')
+        enforce: "pre",
+        loader: require.resolve("source-map-loader"),
       },
       {
         test: /\.ts(x?)$/,
         exclude: /node_modules/,
         use: {
-          loader: require.resolve('babel-loader'),
+          loader: require.resolve("babel-loader"),
           options: {
             presets: [
-              [require.resolve('@babel/preset-env'),
-              {
-                modules: false,
-                useBuiltIns: 'usage',
-              }],
+              [
+                require.resolve("@babel/preset-env"),
+                {
+                  modules: false,
+                  useBuiltIns: "usage",
+                },
+              ],
             ],
-          }
-        }
-      }
-    ]
+          },
+        },
+      },
+    ],
   },
 
   devServer: {
-    contentBase: path.resolve(CWD, 'app'),
+    contentBase: path.resolve(CWD, "app"),
     compress: true,
     port: PORT,
   },
@@ -82,6 +86,7 @@ module.exports = {
           toplevel: false,
           nameCache: null,
           ie8: false,
+          // eslint-disable-next-line @typescript-eslint/camelcase
           keep_fnames: false,
         },
       }),
@@ -92,7 +97,7 @@ module.exports = {
     new ForkTsCheckerWebpackPlugin(),
 
     new EnvironmentPlugin({
-      NODE_ENV: 'development',
+      NODE_ENV: "development",
     }),
 
     new CircularDependencyPlugin({
@@ -102,7 +107,7 @@ module.exports = {
     }),
 
     new HtmlWebpackPlugin({
-      template: path.resolve(CWD, 'index.html'),
+      template: path.resolve(CWD, "index.html"),
     }),
-  ]
+  ],
 };

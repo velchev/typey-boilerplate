@@ -1,6 +1,6 @@
-import { RouterState } from 'connected-react-router';
+import { RouterState } from "connected-react-router";
 
-export interface Action<T> {
+export interface Action<T = {}> {
   type: string;
   payload?: T;
 }

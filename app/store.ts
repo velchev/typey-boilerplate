@@ -1,17 +1,16 @@
-import { StoreState } from '^/types';
-import { connectRouter, routerMiddleware } from 'connected-react-router';
-import { createBrowserHistory } from 'history';
+import { connectRouter, routerMiddleware } from "connected-react-router";
+import { createBrowserHistory } from "history";
 import {
   AnyAction,
   applyMiddleware,
   combineReducers,
   createStore,
   Middleware,
-} from 'redux';
+} from "redux";
+import { composeWithDevTools } from "redux-devtools-extension/developmentOnly";
 
-import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
-
-import { appReducer } from '^/reducers';
+import { StoreState } from "^/types";
+import { appReducer } from "^/reducers";
 
 export const history = createBrowserHistory();
 
@@ -26,5 +25,5 @@ const reducers = combineReducers<StoreState>({
 
 export const store = createStore<StoreState, AnyAction, {}, {}>(
   reducers,
-  composeWithDevTools(applyMiddleware(...middlewares))
+  composeWithDevTools(applyMiddleware(...middlewares)),
 );

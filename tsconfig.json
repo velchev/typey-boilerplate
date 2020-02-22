@@ -17,11 +17,8 @@
     "baseUrl": "./",
     "paths": {
       "^*": ["./app*"]
-    },
+    }
   },
-  "typeRoots": [
-    "node_modules/@types/",
-    "app/@types/"
-  ],
+  "typeRoots": ["node_modules/@types/", "app/@types/"],
   "include": ["app/"]
 }

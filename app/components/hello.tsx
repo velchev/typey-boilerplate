@@ -1,7 +1,7 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React from "react";
+import { connect } from "react-redux";
 
-import { StoreState } from '^/types';
+import { StoreState } from "^/types";
 
 export interface OwnProps {
   compiler: string;
