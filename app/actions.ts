@@ -1,4 +1,6 @@
-export const typePayloadAction = type => payload => ({ type, payload });
+// import { Action } from '^/types';
+
+export const typePayloadAction = (type: string) => (payload: any): any => ({ type, payload });
 
 export const APP_LOADING = 'APP_LOADING';
 export const appLoading = typePayloadAction(APP_LOADING);

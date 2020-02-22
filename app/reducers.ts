@@ -2,17 +2,20 @@ import {
   APP_LOADING,
   APP_LOADING_FAILED,
   APP_LOADING_SUCCEED,
-} from './actions';
+} from '^/actions';
 
-import { AppState } from './types';
+import { Action, AppState } from '^/types';
 
 export const initialState: AppState = {
   loading: false,
   failed: false,
 };
 
-export const appReducer = (state = initialState, { type }) => {
-  switch (type) {
+export const appReducer = (
+  state: AppState = initialState,
+  actions: Action<AppState>
+) => {
+  switch (actions.type) {
     case APP_LOADING:
       return {
         ...state,

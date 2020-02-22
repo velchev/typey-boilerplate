@@ -1,3 +1,4 @@
+import { StoreState } from '^/types';
 import { connectRouter, routerMiddleware } from 'connected-react-router';
 import { createBrowserHistory } from 'history';
 import {
@@ -7,11 +8,10 @@ import {
   createStore,
   Middleware,
 } from 'redux';
-// tslint:disable-next-line: no-submodule-imports
-import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
-import { StoreState } from './types';
 
-import { appReducer } from './reducers';
+import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
+
+import { appReducer } from '^/reducers';
 
 export const history = createBrowserHistory();
 

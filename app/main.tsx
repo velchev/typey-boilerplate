@@ -4,11 +4,14 @@ export interface Props {
   children: React.ReactChildren;
 }
 
+const Header: React.FunctionComponent<{}> = () => <>Header</>;
+const Footer: React.FunctionComponent<{}> = () => <>Footer</>;
+
 const Main: React.FunctionComponent<Props> = ({ children }) => (
   <>
-    Header
+    <Header />
     {children}
-    Footer
+    <Footer />
   </>
 );
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { StoreState } from '../types';
+
+import { StoreState } from '^/types';
 
 export interface OwnProps {
   compiler: string;
@@ -13,9 +14,13 @@ export interface StateProps {
 
 export type Props = OwnProps & StateProps;
 
-const Hello: React.FunctionComponent<Props> = ({ compiler, framework }) => (
+const Hello: React.FunctionComponent<Props> = ({
+  compiler,
+  framework,
+  loading,
+}) => (
   <h1>
-    Hello from {compiler} and {framework}!
+    Hello from {compiler} and {framework}!{loading}
   </h1>
 );
 
