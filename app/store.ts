@@ -1,16 +1,16 @@
-import { connectRouter, routerMiddleware } from "connected-react-router";
-import { createBrowserHistory } from "history";
+import { connectRouter, routerMiddleware } from 'connected-react-router';
+import { createBrowserHistory } from 'history';
 import {
   AnyAction,
   applyMiddleware,
   combineReducers,
   createStore,
   Middleware,
-} from "redux";
-import { composeWithDevTools } from "redux-devtools-extension/developmentOnly";
+} from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 
-import { StoreState } from "^/types";
-import { appReducer } from "^/reducers";
+import { StoreState } from '^/types';
+import { appReducer } from '^/reducers';
 
 export const history = createBrowserHistory();
 

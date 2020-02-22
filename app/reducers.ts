@@ -2,8 +2,8 @@ import {
   APP_LOADING,
   APP_LOADING_FAILED,
   APP_LOADING_SUCCEED,
-} from "^/actions";
-import { Action, AppState } from "^/types";
+} from '^/actions';
+import { Action, AppState } from '^/types';
 
 export const initialState: AppState = {
   loading: false,
