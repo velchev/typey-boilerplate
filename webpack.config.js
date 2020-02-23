@@ -10,8 +10,30 @@ const path = require('path');
 const PORT = process.env.CLIENT_PORT || 9000;
 const CWD = process.cwd();
 
-console.log('CWD', CWD);
-console.log('CWD 2', path.resolve(CWD, 'app'));
+const BABEL_BASE_PRESETS = [
+  [
+    require.resolve('@babel/preset-env'),
+    {
+      modules: false,
+      useBuiltIns: 'usage',
+      corejs: { version: 3 },
+    },
+  ],
+  require.resolve('@babel/preset-react'),
+];
+
+const BABEL_BASE_PLUGINS = [
+  require.resolve('@babel/plugin-proposal-class-properties'),
+  require.resolve('@babel/plugin-proposal-object-rest-spread'),
+];
+
+const BABEL_TYPESCRIPT_PRESETS = BABEL_BASE_PRESETS.concat(
+  require.resolve('@babel/preset-typescript'),
+);
+
+const BABEL_TYPESCRIPT_PLUGINS = BABEL_BASE_PLUGINS.concat(
+  require.resolve('babel-plugin-const-enum'),
+);
 
 module.exports = {
   entry: [
@@ -29,49 +51,50 @@ module.exports = {
   devtool: 'source-map',
 
   resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.json'],
+    extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
     alias: {
-      '^*': path.resolve(CWD, 'app'),
+      '^': path.resolve(__dirname, 'app'),
     },
   },
 
   module: {
     rules: [
       {
-        test: /\.ts(x?)$/,
+        test: /\.jsx?$/,
         exclude: /node_modules/,
-        use: [{ loader: require.resolve('ts-loader') }],
-      },
-      {
-        test: /\.ts(x?)$/,
-        enforce: 'pre',
-        loader: require.resolve('source-map-loader'),
-      },
-      {
-        test: /\.ts(x?)$/,
-        exclude: /node_modules/,
-        use: {
-          loader: require.resolve('babel-loader'),
-          options: {
-            presets: [
-              [
-                require.resolve('@babel/preset-env'),
-                {
-                  modules: false,
-                  useBuiltIns: 'usage',
-                },
-              ],
-            ],
+        use: [
+          {
+            loader: require.resolve('babel-loader'),
+            options: {
+              babelrc: false,
+              presets: BABEL_BASE_PRESETS,
+              plugins: BABEL_BASE_PLUGINS,
+            },
           },
-        },
+        ],
+      },
+      {
+        test: /\.tsx?$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: require.resolve('babel-loader'),
+            options: {
+              babelrc: false,
+              presets: BABEL_TYPESCRIPT_PRESETS,
+              plugins: BABEL_TYPESCRIPT_PLUGINS,
+            },
+          },
+        ],
       },
     ],
   },
 
   devServer: {
-    contentBase: path.resolve(CWD, 'app'),
+    contentBase: CWD,
     compress: true,
     port: PORT,
+    historyApiFallback: true,
   },
 
   optimization: {

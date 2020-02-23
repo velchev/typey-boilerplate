@@ -1,11 +1,11 @@
 import React from 'react';
 
 export interface Props {
-  children: React.ReactChildren;
+  children: React.ReactNode;
 }
 
-const Header: React.FunctionComponent<{}> = () => <>Header</>;
-const Footer: React.FunctionComponent<{}> = () => <>Footer</>;
+const Header: React.FunctionComponent<{}> = () => <header>Header</header>;
+const Footer: React.FunctionComponent<{}> = () => <footer>Footer</footer>;
 
 const Main: React.FunctionComponent<Props> = ({ children }) => (
   <>

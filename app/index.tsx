@@ -3,13 +3,13 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
 
-import Hello from '^/components/hello';
+import App from '^/components/app';
 import { history, store } from '^/store';
 
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
-      <Hello compiler="TypeScript" framework="React" />
+      <App />
     </ConnectedRouter>
   </Provider>,
   document.getElementById('app'),
