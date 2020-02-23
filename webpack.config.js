@@ -53,7 +53,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
     alias: {
-      '^': path.resolve(__dirname, 'app'),
+      '^': path.resolve(CWD, 'app'),
     },
   },
 
@@ -120,11 +120,12 @@ module.exports = {
     new ForkTsCheckerWebpackPlugin(),
 
     new EnvironmentPlugin({
-      NODE_ENV: 'development',
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+      'process.env.DEBUG': JSON.stringify(process.env.DEBUG),
     }),
 
     new CircularDependencyPlugin({
-      exclude: /a\.js|node_modules/,
+      exclude: /node_modules/,
       failOnError: true,
       cwd: CWD,
     }),
