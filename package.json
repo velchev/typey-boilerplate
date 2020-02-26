@@ -11,8 +11,6 @@
     "lint": "tsc --noEmit && eslint 'app/*.{ts,tsx,js,jsx,css,less,json}' --quiet --fix",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "",
   "dependencies": {
     "@babel/core": "^7.8.4",
     "@babel/plugin-proposal-class-properties": "^7.8.3",
@@ -22,7 +20,7 @@
     "@babel/preset-react": "^7.8.3",
     "@babel/preset-typescript": "^7.8.3",
     "@types/history": "^4.7.5",
-    "@types/react": "^16.9.22",
+    "@types/react": "^16.9.23",
     "@types/react-dom": "^16.9.5",
     "@types/react-redux": "^7.1.7",
     "babel-loader": "^8.0.6",
@@ -30,16 +28,18 @@
     "connected-react-router": "^6.7.0",
     "core-js": "^3.6.4",
     "history": "^4.10.1",
+    "immutable": "^4.0.0-rc.12",
     "raf": "^3.4.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-redux": "^7.2.0",
     "react-router": "^5.1.2",
-    "redux": "^4.0.5"
+    "redux": "^4.0.5",
+    "seamless-immutable": "^7.1.4"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^2.20.0",
-    "@typescript-eslint/parser": "^2.20.0",
+    "@typescript-eslint/eslint-plugin": "^2.21.0",
+    "@typescript-eslint/parser": "^2.21.0",
     "circular-dependency-plugin": "^5.2.0",
     "cross-env": "^7.0.0",
     "eslint": "^6.8.0",
@@ -57,5 +57,10 @@
     "webpack": "^4.41.6",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.10.3"
+  },
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "url": "git@github.com:nikolaevtomov/typey-boilerplate.git"
   }
 }
