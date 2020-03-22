@@ -16,6 +16,7 @@ const getWasmArray = () => {
         console.log('count function result is : ' + wasm.count());
         console.log('add function result is : ' + wasm.add(1, 41));
         console.log('factorial function result is : ' + wasm.factorial(9));
+        console.log('report function result is : ' + wasm.report());
       });
   } else {
     console.log(
