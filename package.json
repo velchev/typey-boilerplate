@@ -35,7 +35,8 @@
     "react-redux": "^7.2.0",
     "react-router": "^5.1.2",
     "redux": "^4.0.5",
-    "seamless-immutable": "^7.1.4"
+    "seamless-immutable": "^7.1.4",
+    "wasm-lib": "file:../wasm-lib"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^2.21.0",
