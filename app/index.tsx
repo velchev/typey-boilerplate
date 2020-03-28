@@ -5,9 +5,6 @@ import { ConnectedRouter } from 'connected-react-router';
 
 import App from '^/components/app';
 import { history, store } from '^/store';
-// import { getWasmArray } from './wasm';
-
-// getWasmArray();
 
 ReactDOM.render(
   <Provider store={store}>
