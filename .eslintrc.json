@@ -34,7 +34,6 @@
 
     "strict": [2, "global"],
     "no-duplicate-imports": [2, { "includeExports": true }],
-    "max-lines": [2, { "max": 160 }],
     "no-undef": 2,
     "no-undef-init": 2,
     "no-unreachable": 2,
