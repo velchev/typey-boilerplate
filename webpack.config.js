@@ -4,9 +4,11 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const CircularDependencyPlugin = require('circular-dependency-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const path = require('path');
 /* eslint-enable @typescript-eslint/no-var-requires */
 
+const ISDEV = process.env.NODE_ENV !== 'production';
 const PORT = process.env.CLIENT_PORT || 9000;
 const CWD = process.cwd();
 
@@ -44,7 +46,7 @@ module.exports = {
   output: {
     publicPath: path.resolve(CWD, '/'),
     path: path.resolve(CWD, 'dist'),
-    filename: 'bundle.js',
+    filename: ISDEV ? 'bundle.js' : 'bundle.[hash].js',
   },
 
   // TODO: if production set to none
@@ -86,6 +88,47 @@ module.exports = {
             },
           },
         ],
+      },
+      {
+        test: /\.scss$/,
+        use: ISDEV
+          ? [
+              require.resolve('style-loader'),
+              require.resolve('css-loader'),
+              require.resolve('postcss-loader'),
+              require.resolve('sass-loader'),
+            ]
+          : ExtractTextPlugin.extract({
+              use: [
+                require.resolve('css-loader'),
+                require.resolve('postcss-loader'),
+                {
+                  loader: require.resolve('sass-loader'),
+                  options: {
+                    prependData: '$env: ' + process.env.NODE_ENV + ';',
+                  },
+                },
+              ],
+            }),
+        exclude: /(node_modules)/,
+      },
+      {
+        test: /\.css$/,
+        use: ISDEV
+          ? [
+              require.resolve('style-loader'),
+              require.resolve('css-loader'),
+              require.resolve('postcss-loader'),
+            ]
+          : ExtractTextPlugin.extract([
+              { loader: require.resolve('style-loader') },
+              {
+                loader: require.resolve('css-loader'),
+                options: { minimize: true },
+              },
+              { loader: require.resolve('postcss-loader') },
+            ]),
+        exclude: /(node_modules)/,
       },
     ],
   },
@@ -132,6 +175,12 @@ module.exports = {
 
     new HtmlWebpackPlugin({
       template: path.resolve(CWD, 'index.html'),
+    }),
+
+    new ExtractTextPlugin({
+      disable: ISDEV,
+      filename: 'bundle.[hash].css',
+      allChunks: true,
     }),
   ],
 };
