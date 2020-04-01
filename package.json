@@ -5,7 +5,8 @@
   "main": "app/index.tsx",
   "scripts": {
     "start": "cross-env NODE_ENV=development DEBUG=true webpack-dev-server --mode development",
-    "build": "cross-env NODE_ENV=production DEBUG=false webpack --mode production --progress --colors",
+    "build:clean": "rm -rf dist && mkdir dist",
+    "build": "npm run build:clean && cross-env NODE_ENV=production DEBUG=false webpack --mode production --progress --colors",
     "prettier": "prettier --write '*/*.{ts,tsx,js,jsx,css,less,json}'",
     "typecheck": "tsc --noEmit -p tsconfig.json",
     "lint": "tsc --noEmit && eslint 'app/*.{ts,tsx,js,jsx,css,less,json}' --quiet --fix",
