@@ -5,7 +5,7 @@ int count() {
 }
 
 int add(int a, int b){
-	return a + b + 100;
+	return a + b;
 }
 
 unsigned int factorial(unsigned int n) {

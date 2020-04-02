@@ -1,6 +1,5 @@
 import React from 'react';
-import { factorial, add } from 'wasm-lib';
-
+import { factorial, add } from '../wasm';
 import '^/index.scss';
 
 const App = () => {
