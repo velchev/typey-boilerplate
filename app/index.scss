@@ -1,3 +1,15 @@
-main {
-  color: black;
+@import "node_modules/normalize-scss/sass/normalize/import-now";
+
+$font-face-path: '../static/fonts/';
+
+@font-face {
+  font-family: 'fira_coderegular';
+  src:  url('#{$font-face-path}firacode-regular-webfont.woff2') format('woff2'),
+        url('#{$font-face-path}firacode-regular-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-family: 'fira_coderegular', Arial, Helvetica, sans-serif;
 }

@@ -53,9 +53,11 @@ module.exports = {
   devtool: 'source-map',
 
   resolve: {
+    modules: ['node_modules'],
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
     alias: {
       '^': path.resolve(CWD, 'app'),
+      '^images': path.resolve(CWD, 'static', 'images'),
     },
   },
 
@@ -129,6 +131,24 @@ module.exports = {
               { loader: require.resolve('postcss-loader') },
             ]),
         exclude: /(node_modules)/,
+      },
+      {
+        test: /\.(png|jpg|gif)$/i,
+        use: [
+          {
+            loader: require.resolve('file-loader'),
+            options: {
+              limit: 8192,
+            },
+          },
+        ],
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|svg)$/,
+        use: {
+          loader: require.resolve('url-loader'),
+          options: { limit: 100000 },
+        },
       },
     ],
   },

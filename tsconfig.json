@@ -16,7 +16,8 @@
     "target": "es6",
     "baseUrl": "./",
     "paths": {
-      "^*": ["./app*"]
+      "^*": ["./app*"],
+      "^images*": ["./static/images*"]
     }
   },
   "typeRoots": ["node_modules/@types/", "app/@types/"],
