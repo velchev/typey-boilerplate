@@ -19,9 +19,9 @@ const Hello: React.FunctionComponent<Props> = ({
   framework,
   loading,
 }) => (
-  <h1>
+  <h2>
     Hello from {compiler} and {framework}!{loading}
-  </h1>
+  </h2>
 );
 
 const mapStateToProps = (state: StoreState): StateProps => ({
