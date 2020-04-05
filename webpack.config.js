@@ -42,7 +42,7 @@ const BABEL_TYPESCRIPT_PLUGINS = BABEL_BASE_PLUGINS.concat(
 module.exports = {
   entry: [
     require.resolve('raf/polyfill'),
-    path.resolve(CWD, 'app', 'index.tsx'),
+    path.resolve(CWD, 'src', 'index.tsx'),
   ],
 
   output: {
@@ -57,7 +57,7 @@ module.exports = {
     modules: ['node_modules'],
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
     alias: {
-      '^': path.resolve(CWD, 'app'),
+      '^': path.resolve(CWD, 'src'),
       '^images': path.resolve(CWD, 'static', 'images'),
     },
   },
