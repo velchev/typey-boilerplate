@@ -1,31 +1,14 @@
 import React from 'react';
-import { connect } from 'react-redux';
 
-import { StoreState } from '^/types';
-
-export interface OwnProps {
+export interface Props {
   compiler: string;
   framework: string;
 }
 
-export interface StateProps {
-  loading: boolean;
-}
-
-export type Props = OwnProps & StateProps;
-
-const Hello: React.FunctionComponent<Props> = ({
-  compiler,
-  framework,
-  loading,
-}) => (
+const Hello: React.FunctionComponent<Props> = ({ compiler, framework }) => (
   <h2>
-    Hello from {compiler} and {framework}!{loading}
+    Hello from {compiler} and {framework}!
   </h2>
 );
 
-const mapStateToProps = (state: StoreState): StateProps => ({
-  loading: state.app.loading,
-});
-
-export default connect(mapStateToProps)(React.memo(Hello));
+export default React.memo(Hello);
