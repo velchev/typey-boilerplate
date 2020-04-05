@@ -5,6 +5,8 @@ const CircularDependencyPlugin = require('circular-dependency-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const path = require('path');
 /* eslint-enable @typescript-eslint/no-var-requires */
 
@@ -40,7 +42,7 @@ const BABEL_TYPESCRIPT_PLUGINS = BABEL_BASE_PLUGINS.concat(
 module.exports = {
   entry: [
     require.resolve('raf/polyfill'),
-    path.resolve(CWD, 'app', 'index.tsx'),
+    path.resolve(CWD, 'src', 'index.tsx'),
   ],
 
   output: {
@@ -49,16 +51,22 @@ module.exports = {
     filename: ISDEV ? 'bundle.js' : 'bundle.[hash].js',
   },
 
-  // TODO: if production set to none
-  devtool: 'source-map',
+  devtool: ISDEV ? 'cheap-source-map' : 'cheap-module-source-map',
 
   resolve: {
     modules: ['node_modules'],
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
     alias: {
-      '^': path.resolve(CWD, 'app'),
+      '^': path.resolve(CWD, 'src'),
       '^images': path.resolve(CWD, 'static', 'images'),
     },
+  },
+
+  devServer: {
+    contentBase: CWD,
+    compress: true,
+    port: PORT,
+    historyApiFallback: true,
   },
 
   module: {
@@ -92,6 +100,24 @@ module.exports = {
         ],
       },
       {
+        test: /\.css$/,
+        use: ISDEV
+          ? [
+              require.resolve('style-loader'),
+              require.resolve('css-loader'),
+              require.resolve('postcss-loader'),
+            ]
+          : ExtractTextPlugin.extract([
+              { loader: require.resolve('style-loader') },
+              {
+                loader: require.resolve('css-loader'),
+                options: { minimize: true },
+              },
+              { loader: require.resolve('postcss-loader') },
+            ]),
+        exclude: /(node_modules)/,
+      },
+      {
         test: /\.scss$/,
         use: ISDEV
           ? [
@@ -115,24 +141,6 @@ module.exports = {
         exclude: /(node_modules)/,
       },
       {
-        test: /\.css$/,
-        use: ISDEV
-          ? [
-              require.resolve('style-loader'),
-              require.resolve('css-loader'),
-              require.resolve('postcss-loader'),
-            ]
-          : ExtractTextPlugin.extract([
-              { loader: require.resolve('style-loader') },
-              {
-                loader: require.resolve('css-loader'),
-                options: { minimize: true },
-              },
-              { loader: require.resolve('postcss-loader') },
-            ]),
-        exclude: /(node_modules)/,
-      },
-      {
         test: /\.(png|jpg|gif)$/i,
         use: [
           {
@@ -151,13 +159,6 @@ module.exports = {
         },
       },
     ],
-  },
-
-  devServer: {
-    contentBase: CWD,
-    compress: true,
-    port: PORT,
-    historyApiFallback: true,
   },
 
   optimization: {
@@ -195,6 +196,7 @@ module.exports = {
 
     new HtmlWebpackPlugin({
       template: path.resolve(CWD, 'index.html'),
+      favicon: path.join(__dirname, 'static', 'favicons', 'favicon.ico'),
     }),
 
     new ExtractTextPlugin({
@@ -202,5 +204,26 @@ module.exports = {
       filename: 'bundle.[hash].css',
       allChunks: true,
     }),
-  ],
+  ].concat(
+    ISDEV
+      ? []
+      : [
+          new OptimizeCssAssetsPlugin({
+            assetNameRegExp: /\.optimize\.css$/g,
+            cssProcessor: require('cssnano'),
+            cssProcessorPluginOptions: {
+              preset: ['default', { discardComments: { removeAll: true } }],
+            },
+            canPrint: true,
+          }),
+
+          new CompressionPlugin({
+            filename: '[path].gz[query]',
+            algorithm: 'gzip',
+            test: /\.js$|\.css$|\.html$/,
+            threshold: 8192,
+            minRatio: 0,
+          }),
+        ],
+  ),
 };

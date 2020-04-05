@@ -16,10 +16,10 @@
     "target": "es6",
     "baseUrl": "./",
     "paths": {
-      "^*": ["./app*"],
+      "^*": ["./src*"],
       "^images*": ["./static/images*"]
     }
   },
-  "typeRoots": ["node_modules/@types/", "app/@types/"],
-  "include": ["app/"]
+  "typeRoots": ["node_modules/@types/", "src/@types/"],
+  "include": ["src/"]
 }
