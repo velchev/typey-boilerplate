@@ -6,37 +6,64 @@ export interface Props {
   framework: string;
 }
 
-// const wait = async (delay: number) =>
-//   // eslint-disable-next-line no-undef
-//   new Promise(resolve => {
-//     return setTimeout(() => {
-//       resolve(console.log('yay'));
-//     }, delay);
-//   });
+const wait = (
+  delay: number,
+  param: boolean,
+  callback: (param: boolean) => void,
+) =>
+  // eslint-disable-next-line no-undef
+  new Promise(resolve => {
+    return setTimeout(() => {
+      resolve(callback(param));
+    }, delay);
+  });
 
-// async function doRequests(time: number) {
-//   await wait(time);
-// }
+async function doRequests(
+  time: number,
+  param: boolean,
+  callback: (param: boolean) => void,
+) {
+  await wait(time, param, callback);
+}
 
 const Hello: React.FunctionComponent<Props> = ({ compiler, framework }) => {
   const [isRed, setRed] = React.useState(false);
+  const [isGreen, setGreen] = React.useState(false);
 
   React.useEffect(() => {
-    setTimeout(() => setRed(!isRed), 5000);
-  }, [isRed]);
+    setTimeout(() => setRed(true), 2000);
+  }, []);
+
+  React.useEffect(() => {
+    doRequests(2200, true, setGreen);
+  }, []);
 
   React.useEffect(() => {
     return () => console.log('DONE');
   }, []);
 
   return (
-    <h2
-      className={classnames('black', {
-        red: isRed,
-      })}
-    >
-      Hello from {compiler} and {framework}!
-    </h2>
+    <>
+      <h2>
+        Hello from{' '}
+        <span
+          className={classnames({
+            red: isRed,
+          })}
+        >
+          {compiler}
+        </span>{' '}
+        and{' '}
+        <span
+          className={classnames({
+            green: isGreen,
+          })}
+        >
+          {framework}
+        </span>
+        !
+      </h2>
+    </>
   );
 };
 
