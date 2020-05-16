@@ -55,7 +55,7 @@ module.exports = {
 
   resolve: {
     modules: ['node_modules'],
-    extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
+    extensions: ['.wasm', '.js', '.jsx', '.ts', '.tsx', '.json'],
     alias: {
       '^': path.resolve(CWD, 'src'),
       '^images': path.resolve(CWD, 'static', 'images'),

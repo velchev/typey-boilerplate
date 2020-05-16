@@ -1,5 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
+// import Slider from 'bo-slider';
+import '../web-socket';
 
 export interface Props {
   compiler: string;
@@ -63,6 +65,7 @@ const Hello: React.FunctionComponent<Props> = ({ compiler, framework }) => {
         </span>
         !
       </h2>
+      {/* <Slider /> */}
     </>
   );
 };
