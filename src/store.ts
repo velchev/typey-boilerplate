@@ -14,7 +14,7 @@ import { appReducer } from '^/reducers';
 
 export const history = createBrowserHistory();
 
-const middlewares: Array<Middleware<{}, StoreState>> = [
+const middlewares: Array<Middleware<unknown, StoreState>> = [
   routerMiddleware(history),
 ];
 
@@ -23,7 +23,7 @@ const reducers = combineReducers<StoreState>({
   app: appReducer,
 });
 
-export const store = createStore<StoreState, AnyAction, {}, {}>(
+export const store = createStore<StoreState, AnyAction, unknown, unknown>(
   reducers,
   composeWithDevTools(applyMiddleware(...middlewares)),
 );

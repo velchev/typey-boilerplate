@@ -1,7 +1,6 @@
-export const typePayloadAction = (type: string) => (payload: {}): Record<
-  string,
-  {}
-> => ({
+export const typePayloadAction = (type: string) => (
+  payload: unknown,
+): Record<string, unknown> => ({
   type,
   payload,
 });
