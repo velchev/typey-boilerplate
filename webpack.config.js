@@ -173,7 +173,6 @@ module.exports = {
           toplevel: false,
           nameCache: null,
           ie8: false,
-          // eslint-disable-next-line @typescript-eslint/camelcase
           keep_fnames: false,
         },
       }),
@@ -201,7 +200,7 @@ module.exports = {
 
     new ExtractTextPlugin({
       disable: ISDEV,
-      filename: 'bundle.[hash].css',
+      filename: ISDEV ? 'bundle.css' : 'bundle.[hash].css',
       allChunks: true,
     }),
   ].concat(
