@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { StoreState } from '^/types';
 
 import '^/index.scss';
+import Header from '^/components/header';
+import Footer from '^/components/footer';
 import LogoPath from '^images/logo.png';
 
 export interface StateProps {
@@ -12,9 +14,6 @@ export interface StateProps {
 export interface Props extends StateProps {
   children: React.ReactNode;
 }
-
-const Header: React.FunctionComponent = () => <header>...</header>;
-const Footer: React.FunctionComponent = () => <footer>...</footer>;
 
 const Main: React.FunctionComponent<Props> = ({ loading, children }) => (
   <>

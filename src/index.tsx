@@ -6,18 +6,17 @@ import { Switch, Route } from 'react-router';
 
 import { history, store } from '^/store';
 import Main from '^/components/main';
+import Hello from '^/components/hello';
+import Ping from '^/components/ping';
 
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <Main>
         <Switch>
-          <Route path="/example" render={() => <h2>Example</h2>} />
+          <Route path="/ping" render={() => <Ping />} />
 
-          <Route
-            path="/"
-            render={() => <h2>Hello from Typescript and React!</h2>}
-          />
+          <Route path="/" render={() => <Hello />} />
         </Switch>
       </Main>
     </ConnectedRouter>
