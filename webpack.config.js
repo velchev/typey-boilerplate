@@ -3,8 +3,8 @@ const { EnvironmentPlugin } = require('webpack');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const CircularDependencyPlugin = require('circular-dependency-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const path = require('path');
@@ -107,7 +107,7 @@ module.exports = {
               require.resolve('css-loader'),
               require.resolve('postcss-loader'),
             ]
-          : ExtractTextPlugin.extract([
+          : MiniCssExtractPlugin.extract([
               { loader: require.resolve('style-loader') },
               {
                 loader: require.resolve('css-loader'),
@@ -126,7 +126,7 @@ module.exports = {
               require.resolve('postcss-loader'),
               require.resolve('sass-loader'),
             ]
-          : ExtractTextPlugin.extract({
+          : MiniCssExtractPlugin.extract({
               use: [
                 require.resolve('css-loader'),
                 require.resolve('postcss-loader'),
@@ -162,21 +162,8 @@ module.exports = {
   },
 
   optimization: {
-    minimizer: [
-      new UglifyJsPlugin({
-        uglifyOptions: {
-          warnings: false,
-          parse: {},
-          compress: {},
-          mangle: true,
-          output: null,
-          toplevel: false,
-          nameCache: null,
-          ie8: false,
-          keep_fnames: false,
-        },
-      }),
-    ],
+    minimize: true,
+    minimizer: [new TerserPlugin()],
   },
 
   plugins: [
@@ -198,10 +185,8 @@ module.exports = {
       favicon: path.join(__dirname, 'static', 'favicons', 'favicon.ico'),
     }),
 
-    new ExtractTextPlugin({
-      disable: ISDEV,
+    new MiniCssExtractPlugin({
       filename: ISDEV ? 'bundle.css' : 'bundle.[hash].css',
-      allChunks: true,
     }),
   ].concat(
     ISDEV
