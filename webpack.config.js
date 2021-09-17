@@ -100,44 +100,13 @@ module.exports = {
         ],
       },
       {
-        test: /\.css$/,
-        use: ISDEV
-          ? [
-              require.resolve('style-loader'),
-              require.resolve('css-loader'),
-              require.resolve('postcss-loader'),
-            ]
-          : MiniCssExtractPlugin.extract([
-              { loader: require.resolve('style-loader') },
-              {
-                loader: require.resolve('css-loader'),
-                options: { minimize: true },
-              },
-              { loader: require.resolve('postcss-loader') },
-            ]),
-        exclude: /(node_modules)/,
-      },
-      {
-        test: /\.scss$/,
-        use: ISDEV
-          ? [
-              require.resolve('style-loader'),
-              require.resolve('css-loader'),
-              require.resolve('postcss-loader'),
-              require.resolve('sass-loader'),
-            ]
-          : MiniCssExtractPlugin.extract({
-              use: [
-                require.resolve('css-loader'),
-                require.resolve('postcss-loader'),
-                {
-                  loader: require.resolve('sass-loader'),
-                  options: {
-                    prependData: '$env: ' + process.env.NODE_ENV + ';',
-                  },
-                },
-              ],
-            }),
+        test: /\.(sa|sc|c)ss$/,
+        use: [
+            ISDEV ? require.resolve('style-loader') : MiniCssExtractPlugin.loader,
+            require.resolve('css-loader'),
+            require.resolve('postcss-loader'),
+            require.resolve('sass-loader'),
+          ],
         exclude: /(node_modules)/,
       },
       {
