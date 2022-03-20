@@ -6,7 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const path = require('path');
 /* eslint-enable @typescript-eslint/no-var-requires */
 
@@ -132,7 +132,7 @@ module.exports = {
 
   optimization: {
     minimize: true,
-    minimizer: [new TerserPlugin()],
+    minimizer: [new TerserPlugin(), new CssMinimizerPlugin()],
   },
 
   plugins: [
@@ -161,15 +161,6 @@ module.exports = {
     ISDEV
       ? []
       : [
-          new OptimizeCssAssetsPlugin({
-            assetNameRegExp: /\.optimize\.css$/g,
-            cssProcessor: require('cssnano'),
-            cssProcessorPluginOptions: {
-              preset: ['default', { discardComments: { removeAll: true } }],
-            },
-            canPrint: true,
-          }),
-
           new CompressionPlugin({
             filename: '[path].gz[query]',
             algorithm: 'gzip',
