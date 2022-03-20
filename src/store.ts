@@ -7,7 +7,7 @@ import {
   createStore,
   Middleware,
 } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
+import { composeWithDevTools } from '@redux-devtools/extension';
 
 import { StoreState } from '^/types';
 import { appReducer } from '^/reducers';
