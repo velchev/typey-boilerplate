@@ -102,11 +102,11 @@ module.exports = {
       {
         test: /\.(sa|sc|c)ss$/,
         use: [
-            ISDEV ? require.resolve('style-loader') : MiniCssExtractPlugin.loader,
-            require.resolve('css-loader'),
-            require.resolve('postcss-loader'),
-            require.resolve('sass-loader'),
-          ],
+          ISDEV ? require.resolve('style-loader') : MiniCssExtractPlugin.loader,
+          require.resolve('css-loader'),
+          require.resolve('postcss-loader'),
+          require.resolve('sass-loader'),
+        ],
         exclude: /(node_modules)/,
       },
       {
