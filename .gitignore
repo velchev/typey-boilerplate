@@ -3,6 +3,7 @@
 
 # coverage
 /coverage
+/target
 
 # production
 build*/
