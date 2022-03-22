@@ -27,7 +27,7 @@
       "version": "detect"
     }
   },
-  "rules":{
+  "rules": {
     "prettier/prettier": 2,
 
     "strict": [2, "global"],
