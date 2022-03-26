@@ -22,7 +22,7 @@ const Main: React.FunctionComponent<Props> = ({ loading, children }) => (
     ) : (
       <>
         <Header />
-        {children}
+        <main>{children}</main>
         <Footer />
       </>
     )}
@@ -32,5 +32,7 @@ const Main: React.FunctionComponent<Props> = ({ loading, children }) => (
 const mapStateToProps = (state: StoreState): StateProps => ({
   loading: state.app.loading,
 });
+
+export { Main as UnwrappedMain };
 
 export default connect(mapStateToProps)(React.memo(Main));

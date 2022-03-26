@@ -1,9 +1,9 @@
-export const typePayloadAction = (type: string) => (
-  payload: unknown,
-): Record<string, unknown> => ({
-  type,
-  payload,
-});
+export const typePayloadAction =
+  (type: string) =>
+  (payload: unknown): Record<string, unknown> => ({
+    type,
+    payload,
+  });
 
 export const APP_LOADING = 'APP_LOADING';
 export const appLoading = typePayloadAction(APP_LOADING);

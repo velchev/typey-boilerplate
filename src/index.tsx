@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
-import { Switch, Route } from 'react-router';
+import { Routes, Route } from 'react-router-dom';
 
 import { history, store } from '^/store';
 import Main from '^/components/main';
@@ -13,11 +13,15 @@ ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <Main>
-        <Switch>
-          <Route path="/ping" render={() => <Ping />} />
+        <Routes>
+          <Route path="/ping">
+            <Ping />
+          </Route>
 
-          <Route path="/" render={() => <Hello />} />
-        </Switch>
+          <Route path="/">
+            <Hello />
+          </Route>
+        </Routes>
       </Main>
     </ConnectedRouter>
   </Provider>,

@@ -1,15 +1,42 @@
 import React from 'react';
-import { shallow } from 'enzyme';
-import Main from './main';
+import { shallow, mount } from 'enzyme';
+import Main, { UnwrappedMain } from '^/components/main';
+import MockProvider from '^/helpers/mock-provider';
 
-describe('Main', () => {
-  it('renders a <main>', () => {
+describe('UnwrappedMain shallow', () => {
+  it('renders component', () => {
     const wrapper = shallow(
-      <Main>
+      <UnwrappedMain loading={true}>
         <p>children</p>
-      </Main>,
+      </UnwrappedMain>,
     );
 
-    expect(wrapper.type()).toBe('main');
+    console.log(wrapper.debug());
+  });
+});
+
+describe('UnwrappedMain mount', () => {
+  it('renders component', () => {
+    const wrapper = mount(
+      <UnwrappedMain loading={false}>
+        <p>children</p>
+      </UnwrappedMain>,
+    );
+
+    console.log(wrapper.debug());
+  });
+});
+
+describe('Main mount', () => {
+  it('renders component', () => {
+    const wrapper = mount(
+      <MockProvider>
+        <Main>
+          <p>children</p>
+        </Main>
+      </MockProvider>,
+    );
+
+    console.log(wrapper.debug());
   });
 });

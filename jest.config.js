@@ -1,5 +1,6 @@
 module.exports = {
   preset: 'ts-jest',
+  testEnvironment: 'jsdom',
   transform: {
     '^.+\\.(ts|tsx)?$': 'ts-jest',
     '^.+\\.(js|jsx)$': 'babel-jest',
@@ -12,11 +13,16 @@ module.exports = {
   modulePaths: ['<rootDir>'],
   verbose: true,
   testMatch: ['<rootDir>/**/*(*.)+(test).+(tsx|ts)'],
-  setupFilesAfterEnv: ['<rootDir>src/setup-tests.ts'],
+  setupFilesAfterEnv: ['<rootDir>/src/helpers/setup-tests.ts'],
   moduleFileExtensions: ['js', 'ts', 'tsx', ''],
   roots: ['<rootDir>'],
   moduleDirectories: ['.', 'node_modules'],
   collectCoverage: true,
   coverageDirectory: 'coverage',
-  collectCoverageFrom: ['src/**/*.tsx'],
+  collectCoverageFrom: ['src/**/*.{js,jsx,ts,tsx}'],
+  coveragePathIgnorePatterns: [
+    'node_modules',
+    '<rootDir>/src/helpers',
+    '<rootDir>/src/@types',
+  ],
 };

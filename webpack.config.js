@@ -63,7 +63,7 @@ module.exports = {
   },
 
   devServer: {
-    contentBase: CWD,
+    static: CWD,
     compress: true,
     port: PORT,
     historyApiFallback: true,
