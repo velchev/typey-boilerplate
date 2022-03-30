@@ -7,6 +7,7 @@ import {
   createStore,
   Middleware,
 } from 'redux';
+import thunk from 'redux-thunk';
 import { composeWithDevTools } from '@redux-devtools/extension';
 
 import { StoreState } from '^/types';
@@ -16,6 +17,7 @@ export const history = createBrowserHistory();
 
 const middlewares: Array<Middleware<unknown, StoreState>> = [
   routerMiddleware(history),
+  thunk,
 ];
 
 const reducers = combineReducers<StoreState>({
