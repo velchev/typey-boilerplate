@@ -13,7 +13,10 @@ module.exports = {
   modulePaths: ['<rootDir>'],
   verbose: true,
   testMatch: ['<rootDir>/**/*(*.)+(test).+(tsx|ts)'],
-  setupFilesAfterEnv: ['<rootDir>/src/helpers/setup-tests.ts'],
+  setupFilesAfterEnv: [
+    './node_modules/jest-enzyme/lib/index.js',
+    '<rootDir>/src/helpers/setup-tests.ts',
+  ],
   moduleFileExtensions: ['js', 'ts', 'tsx', ''],
   roots: ['<rootDir>'],
   moduleDirectories: ['.', 'node_modules'],
