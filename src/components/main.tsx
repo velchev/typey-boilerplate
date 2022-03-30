@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { StoreState } from '^/types';
 
 import '^/index.scss';
+import { StoreState } from '^/types';
 import Header from '^/components/header';
 import Footer from '^/components/footer';
 import LogoPath from '^images/logo.png';

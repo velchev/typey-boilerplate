@@ -4,31 +4,35 @@ import Main, { UnwrappedMain } from '^/components/main';
 import MockProvider from '^/helpers/mock-provider';
 
 describe('UnwrappedMain shallow', () => {
-  it('renders component', () => {
+  it('renders loading icon', () => {
     const wrapper = shallow(
       <UnwrappedMain loading={true}>
         <p>children</p>
       </UnwrappedMain>,
     );
 
-    console.log(wrapper.debug());
+    expect(wrapper.find('img')).toBeDefined();
   });
 });
 
 describe('UnwrappedMain mount', () => {
-  it('renders component', () => {
+  it('renders header, footer and children', () => {
+    const Children = () => <p>children</p>;
+
     const wrapper = mount(
       <UnwrappedMain loading={false}>
-        <p>children</p>
+        <Children />
       </UnwrappedMain>,
     );
 
-    console.log(wrapper.debug());
+    expect(wrapper.find('header')).toBeDefined();
+    expect(wrapper.find('footer')).toBeDefined();
+    expect(wrapper.find(<Children />)).toBeDefined();
   });
 });
 
 describe('Main mount', () => {
-  it('renders component', () => {
+  it('renders ref as null', () => {
     const wrapper = mount(
       <MockProvider>
         <Main>
@@ -37,6 +41,6 @@ describe('Main mount', () => {
       </MockProvider>,
     );
 
-    console.log(wrapper.debug());
+    expect(wrapper.prop('children').ref).toBeNull();
   });
 });
