@@ -1,8 +1,7 @@
 import React from 'react';
-import { Provider } from 'react-redux';
-import { store } from '^/store';
+import { Provider, ProviderProps } from 'react-redux';
 
-const MockProvider: React.FunctionComponent = ({ children }) => (
+const MockProvider = ({ children, store }: ProviderProps) => (
   <Provider store={store}>{children}</Provider>
 );
 

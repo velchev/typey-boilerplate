@@ -2,6 +2,8 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 import Main, { UnwrappedMain } from '^/components/main';
 import MockProvider from '^/helpers/mock-provider';
+import { StoreState } from '^/types';
+import { mockStore } from '^/helpers/mock-store';
 
 describe('UnwrappedMain shallow', () => {
   it('renders loading icon', () => {
@@ -33,8 +35,11 @@ describe('UnwrappedMain mount', () => {
 
 describe('Main mount', () => {
   it('renders ref as null', () => {
+    const store = (initialStore: Partial<StoreState>) =>
+      mockStore(initialStore);
+
     const wrapper = mount(
-      <MockProvider>
+      <MockProvider store={store({})}>
         <Main>
           <p>children</p>
         </Main>

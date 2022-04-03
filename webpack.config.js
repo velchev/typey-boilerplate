@@ -51,7 +51,7 @@ module.exports = {
     filename: ISDEV ? 'bundle.js' : 'bundle.[hash].js',
   },
 
-  devtool: ISDEV ? 'cheap-source-map' : 'cheap-module-source-map',
+  ...(ISDEV && { devtool: 'eval-source-map' }),
 
   resolve: {
     modules: ['node_modules'],
@@ -161,13 +161,13 @@ module.exports = {
     ISDEV
       ? []
       : [
-          new CompressionPlugin({
-            filename: '[path].gz[query]',
-            algorithm: 'gzip',
-            test: /\.js$|\.css$|\.html$/,
-            threshold: 8192,
-            minRatio: 0,
-          }),
-        ],
+        new CompressionPlugin({
+          filename: '[path].gz[query]',
+          algorithm: 'gzip',
+          test: /\.js$|\.css$|\.html$/,
+          threshold: 8192,
+          minRatio: 0,
+        }),
+      ],
   ),
 };

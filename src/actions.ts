@@ -1,6 +1,8 @@
+import { AnyAction } from 'redux';
+
 export const typePayloadAction =
   (type: string) =>
-  (payload: unknown): Record<string, unknown> => ({
+  (payload?: unknown): AnyAction => ({
     type,
     payload,
   });

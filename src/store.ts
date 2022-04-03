@@ -1,5 +1,3 @@
-import { connectRouter, routerMiddleware } from 'connected-react-router';
-import { createBrowserHistory } from 'history';
 import {
   AnyAction,
   applyMiddleware,
@@ -13,15 +11,9 @@ import { composeWithDevTools } from '@redux-devtools/extension';
 import { StoreState } from '^/types';
 import { appReducer } from '^/reducers';
 
-export const history = createBrowserHistory();
+export const middlewares: Array<Middleware<unknown, StoreState>> = [thunk];
 
-const middlewares: Array<Middleware<unknown, StoreState>> = [
-  routerMiddleware(history),
-  thunk,
-];
-
-const reducers = combineReducers<StoreState>({
-  router: connectRouter(history),
+export const reducers = combineReducers<StoreState>({
   app: appReducer,
 });
 
